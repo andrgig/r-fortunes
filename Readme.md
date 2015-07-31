@@ -7,7 +7,12 @@ See [Fortunes List](#fortunes-list) for a more detailed list.
 
 ## Instructions
 
-(**Note - currently not working, something about embedded newlines and the way `read.fortunes()` reads stuff in. Currently I patch my .Rprofile as described in [R fortune monkey-patching](#r-fortune-monkey-patching)**).
+**Note - currently not working, something about embedded newlines and the way `read.fortunes()` reads stuff in. Currently I patch my .Rprofile as described in [R fortune monkey-patching](#r-fortune-monkey-patching)**.
+
+Looks like if I want to use the native `read.fortunes()` function I must comply with `read.table(file, header=T, sep=';', quote='"', colClasses='character')`. If I leave the newlines as-is `read.table` really just can't handle it. If I embed them as '\n' and use `allowEscapes=TRUE` it works (apart for glomping up some of the escaped '"' and turning some into '\'...), but `read.fortunes` uses `allowEscapes=FALSE` by default (can I replace `read.table` for the `read.fortunes` call only?)
+
+Perhaps I should store the CSVs elsewhere and read them in myself?
+Or an alternative is to remove *all* newlines which might cause trouble with long quotes (with paragraphs) and also with ASCII art.
 
 Just place the CSV files of the fortunes you want into `system.file('fortunes', package='fortunes')` (usually `/path/to/R/library/fortunes/fortunes`). Then the `fortunes` package will automagically read them
 
@@ -100,7 +105,7 @@ The header is "quote;author;context;source;date".
 The files are read in with this command in `read.fortunes()` (which we cannot adjust):
 
     read.table(file, header = TRUE, sep = ";", 
-               quote = "\"", colClasses = "character"))
+               quote = "\"", colClasses = "character")
 
 At the moment (31 Jul) I'm having trouble with multiline fortunes, even with quoting, so I'll tinker around and see.
 
