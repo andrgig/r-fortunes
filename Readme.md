@@ -3,11 +3,11 @@
 This contains fortunes from the following standard linux `fortunes` packages,
  converted into a format that the [R fortunes package](https://cran.r-project.org/web/packages/fortunes/index.html) understands.
 Just about all the `fortunes-*` packages except for `fortunes-off`[ensive], and language-specific ones.
-See [Fortunes List][] for a more detailed list.
+See [Fortunes List](#fortunes-list) for a more detailed list.
 
 ## Instructions
 
-(**Note - currently not working, something about embedded newlines and the way `read.fortunes()` reads stuff in. Currently I patch my .Rprofile as described in [R fortune monkey-patching][]**).
+(**Note - currently not working, something about embedded newlines and the way `read.fortunes()` reads stuff in. Currently I patch my .Rprofile as described in [R fortune monkey-patching](#r-fortune-monkey-patching)**).
 
 Just place the CSV files of the fortunes you want into `system.file('fortunes', package='fortunes')` (usually `/path/to/R/library/fortunes/fortunes`). Then the `fortunes` package will automagically read them
 
